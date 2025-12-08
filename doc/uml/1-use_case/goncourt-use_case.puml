@@ -5,7 +5,7 @@ left to right direction
 actor President as p
 actor Utilisateur as u
 
-u <|-right- d
+u <|-right- p
 
 rectangle Goncourt {
   usecase "Afficher les livres composant chaque selection" as UC1
@@ -15,8 +15,8 @@ rectangle Goncourt {
 }
 
 u -- UC1
-d -- UC2
-d -- UC3
+p -- UC2
+p -- UC3
 
  UC4 .up.> UC1 : extends
  UC4 .up.> UC2 : extends
