@@ -2,13 +2,12 @@
 
 class Livre
 {
-    -string ISBN
+    -int ISBN
     -string titre
     -text resume
     -date date_parution
     -integer nombre_pages
     -string prix_editeur
-    -integer nombre_votes
 }
 
 class Auteur
@@ -27,27 +26,56 @@ class Editeur
     -string localisation
 }
 
-class Selection{
+class Personnage
+{
     -integer id
     -string nom
 }
 
-class Jury{
+class Jury
+{
     -integer id
     -string identifiant
     -string mot_de_passe
     -boolean est_president
 }
 
-class Personnages{
+class TourVote
+{
     -integer id
     -string nom
 }
 
-Livre "0..n" <-- "1" Auteur : ecrit >
-Livre "0..n" <--"1" Editeur : publie >
-Livre "1..n" <--"1" Selection : est selectionne >
-Livre "1" -->"0..n" Jury : vote >
-Livre "1" -->"1..n" Personnages : comporte >
+class Vote
+{
+    -integer id
+    -integer nb_voix
+}
+
+class Selection
+{
+    -integer id
+    -string nom
+    -date date_selection
+}
+
+class SelectionLivre
+{
+    -integer id
+    -string nom
+    -date date_selection
+}
+
+' Relations
+
+Auteur "1" --> "0..n" Livre : ecrit >
+Editeur "1" --> "0..n" Livre : publie >
+Livre "1" --> "0..n" Personnage : comporte >
+Livre "1" --> "0..n" Vote : recoit >
+
+Jury "1" --> "0..n" Vote : effectue >
+Vote "1" --> "1" TourVote : pour >
+Selection "1" --> "1..n" SelectionLivre : contient >
+SelectionLivre "1..n" --> "1" Livre : concerne >
 
 @enduml
