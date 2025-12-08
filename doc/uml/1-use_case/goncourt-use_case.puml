@@ -1,0 +1,25 @@
+@startuml
+
+left to right direction
+
+actor President as p
+actor Utilisateur as u
+
+u <|-right- d
+
+rectangle Goncourt {
+  usecase "Afficher les livres composant chaque selection" as UC1
+  usecase "Indiquer les livres de la deuxième et troisième sélection" as UC2
+  usecase "Indiquer le nombre de votes obtenus" as UC3
+  usecase "Se connecter" as UC4
+}
+
+u -- UC1
+d -- UC2
+d -- UC3
+
+ UC4 .up.> UC1 : extends
+ UC4 .up.> UC2 : extends
+ UC4 .up.> UC3 : extends
+
+@enduml
