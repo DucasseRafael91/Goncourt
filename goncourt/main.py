@@ -28,7 +28,7 @@ Bienvenue dans le prix Goncourt
         print("4 - Indiquer le nombre de votes obtenus par chaque livre présent au dernier tour de scrutin")
         print("5 - Quitter")
 
-        choice = input("Tapez 1, 2, 3 : ")
+        choice = input("Tapez 1, 2, 3, 4 ou 5 : ")
 
         if choice == "1":
             print_books(goncourt)

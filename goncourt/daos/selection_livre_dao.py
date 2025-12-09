@@ -56,7 +56,7 @@ class SelectionLivreDao(Dao[SelectionLivre]):
     def update(self, selection: SelectionLivre) -> bool:
         pass
 
-    def delete_by_selection_id(self, id_selection: int) -> bool:
+    def delete(self, id_selection: int) -> bool:
         try:
             with Dao.connection.cursor() as cursor:
                 sql = "DELETE FROM g_selection_livre WHERE s_fk_selection_id=%s"

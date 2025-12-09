@@ -42,3 +42,11 @@ class Dao[T](ABC):
         :return: True si la mise à jour a pu être réalisée
         """
         ...
+    @abstractmethod
+    def delete(self, id_entity: int) -> bool:
+        """Supprime en BD l'entité correspondant à obj
+
+        :param obj: objet dont l'entité correspondante est à supprimer
+        :return: True si la suppression a pu être réalisée
+        """
+        ...
