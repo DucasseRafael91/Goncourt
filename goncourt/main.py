@@ -7,6 +7,7 @@ Application de gestion d'une école
 from datetime import date
 
 from business.goncourt import Goncourt
+from models import Book
 from models.selection_livre import SelectionLivre
 
 
@@ -30,44 +31,11 @@ Bienvenue dans le prix Goncourt
         choice = input("Tapez 1, 2 ou 3 : ")
 
         if choice == "1":
-            for i in range(1, 4):
-                books = goncourt.get_all_books_by_selection(i)
-                print(f"\nLivres de la sélection {i} :")
-                for book in books:
-                    print(f"-{book}")
-            books = goncourt.get_all_books_by_selection(4)
-            print("Livre Lauréat :")
-            print(f"{books[0]}")
+            print_books(goncourt)
         elif choice == "2":
-            books = goncourt.get_all_books_by_selection(1)
-            print("Livres de la sélection 1 :")
-            index=1
-            for book in books:
-                print(f"{index} {book}")
-                index=index+1
-            goncourt.delete_selection_livre_by_selection_id(2)
-            print("Choisissez les 8 livres qui doivent faire partie de la deuxiéme selection :")
-            for i in range(1, 9):
-                book_choosen = int(input(f"Tapez le numéro du livre {i} : "))
-                selected_book = books[book_choosen - 1]
-                selectionLivre = SelectionLivre(selected_book)
-                selectionLivre.selection = 2
-                goncourt.create_selection_livre(selectionLivre)
+            indicate_selection(goncourt,2)
         elif choice == "3":
-            books = goncourt.get_all_books_by_selection(2)
-            print("Livres de la sélection 2 :")
-            index = 1
-            for book in books:
-                print(f"{index} {book}")
-                index = index + 1
-            goncourt.delete_selection_livre_by_selection_id(3)
-            print("Choisissez les 4 livres qui doivent faire partie de la troisiéme selection :")
-            for i in range(1, 5):
-                book_choosen = int(input(f"Tapez le numéro du livre {i} : "))
-                selected_book = books[book_choosen - 1]
-                selectionLivre = SelectionLivre(selected_book)
-                selectionLivre.selection = 3
-                goncourt.create_selection_livre(selectionLivre)
+            indicate_selection(goncourt,3)
         elif choice == "4":
             pass
         elif choice == "5":
@@ -75,6 +43,42 @@ Bienvenue dans le prix Goncourt
             break
         else:
             print("Choix invalide, veuillez taper 1, 2 ou 3.")
+
+
+def print_books(goncourt: Goncourt):
+    for i in range(1, 4):
+        books = goncourt.get_all_books_by_selection(i)
+        print(f"\nLivres de la sélection {i} :")
+        for book in books:
+            print(f"-{book}")
+    books = goncourt.get_all_books_by_selection(4)
+    print("Livre Lauréat :")
+    print(f"{books[0]}")
+
+
+def indicate_selection(goncourt: Goncourt, selection_number: int):
+    books = goncourt.get_all_books_by_selection(selection_number - 1)
+    print(f"Livres de la sélection {selection_number - 1} :")
+    index = 1
+    for book in books:
+        print(f"{index} {book}")
+        index = index + 1
+    goncourt.delete_selection_livre_by_selection_id(selection_number)
+    print(f"Choisissez les livres qui doivent faire partie de la {selection_number}eme selection :")
+    if selection_number == 2:
+        num_books = 8
+    else:
+        num_books = 4
+    assign_book_to_selection(books, goncourt, num_books, selection_number)
+
+
+def assign_book_to_selection(books: list[Book], goncourt: Goncourt, num_books: int, selection_number: int):
+    for i in range(1, num_books + 1):
+        book_chosen = int(input(f"Tapez le numéro du livre {i} : "))
+        selected_book = books[book_chosen - 1]
+        selectionLivre = SelectionLivre(selected_book)
+        selectionLivre.selection = selection_number
+        goncourt.create_selection_livre(selectionLivre)
 
 
 if __name__ == '__main__':
