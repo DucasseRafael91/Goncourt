@@ -22,4 +22,4 @@ class Character:
             book.characters_in_story.append(self)
 
     def __str__(self) -> str:
-        return self.name
+        return self.name + f" (dans '{self.book.title}')"
