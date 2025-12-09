@@ -5,6 +5,7 @@ from datetime import date
 from typing import Optional
 from models import Editor
 from models import Author
+from models import Character
 
 
 @dataclass
@@ -18,6 +19,7 @@ class Book:
     editor_price: float
     editor: Editor
     author: Author
+    characters_in_story: list[Character] = field(default_factory=list, init=False)
 
     def set_editor(self, editor: Editor) -> None:
         """Associe un éditeur à ce livre."""
@@ -34,6 +36,12 @@ class Book:
         self.author = author
         if self not in author.books_written:
             author.books_written.append(self)
+
+    def add_character(self, character: Character) -> None:
+        """Ajoute un livre à la liste des livres édités."""
+        if character not in self.characters_in_story:
+            self.characters_in_story.append(character)
+        character.book = self
 
     def __str__(self) -> str:
         return self.title
