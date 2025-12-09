@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Classe Editeur représentant un éditeur
+Classe Selection représentant les 3 étapes de la sélection du prix Goncourt
 """
 
 from dataclasses import dataclass, field
@@ -9,8 +9,8 @@ from typing import Optional
 
 
 @dataclass
-class Editeur:
-    """Editeur représentant un éditeur de livres."""
+class Selection:
+    """Selection représentant une étape de la sélection du prix Goncourt."""
     id: Optional[int] = field(default=None, init=False)
     name: str
 
