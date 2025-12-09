@@ -13,7 +13,25 @@ from typing import Optional, List
 @dataclass
 class SelectionLivreDao(Dao[SelectionLivre]):
     def create(self, selection: SelectionLivre) -> int:
-        pass
+        try:
+            with Dao.connection.cursor() as cursor:
+                sql = """
+                           INSERT INTO g_selection_livre (s_fk_selection_id, s_fk_livre_isbn)
+                           VALUES (%s, %s)
+                       """
+                cursor.execute(sql, (selection.selection, selection.book.isbn))
+
+
+                selection_id = cursor.lastrowid
+
+            # Validation de l'insertion
+            Dao.connection.commit()
+            return selection_id
+
+        except Exception as e:
+            print("Erreur lors de la création :", e)
+            Dao.connection.rollback()
+            return 0
 
     def read(self, id_selection: int) -> Optional[SelectionLivre]:
         """Renvoie la sélection correspondant à l'entité dont l'id est id_selection

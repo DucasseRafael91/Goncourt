@@ -11,8 +11,8 @@ from models import Selection
 @dataclass
 class SelectionLivre:
     """Livre représentant un livre dans le contexte du prix Goncourt."""
-    book: Optional[Book] = field(default=None, init=False)
-    selection: Optional[Selection] = field(default=None, init=False)
+    book: Book
+    selection: Optional[int] = field(default=None, init=False)
     nombre_votes: Optional[int] = field(default=None, init=False)
 
     def __str__(self) -> str:

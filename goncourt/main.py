@@ -7,7 +7,7 @@ Application de gestion d'une école
 from datetime import date
 
 from business.goncourt import Goncourt
-from models.Editor import Editor
+from models.selection_livre import SelectionLivre
 
 
 def main() -> None:
@@ -50,9 +50,24 @@ Bienvenue dans le prix Goncourt
             for i in range(1, 9):
                 book_choosen = int(input(f"Tapez le numéro du livre {i} : "))
                 selected_book = books[book_choosen - 1]
-                selectionLivreDao = SelectionLivreDao()
+                selectionLivre = SelectionLivre(selected_book)
+                selectionLivre.selection = 2
+                goncourt.create_selection_livre(selectionLivre)
         elif choice == "3":
-            pass
+            books = goncourt.get_all_books_by_selection(2)
+            print("Livres de la sélection 2 :")
+            index = 1
+            for book in books:
+                print(f"{index} {book}")
+                index = index + 1
+            goncourt.delete_selection_livre_by_selection_id(3)
+            print("Choisissez les 4 livres qui doivent faire partie de la troisiéme selection :")
+            for i in range(1, 5):
+                book_choosen = int(input(f"Tapez le numéro du livre {i} : "))
+                selected_book = books[book_choosen - 1]
+                selectionLivre = SelectionLivre(selected_book)
+                selectionLivre.selection = 3
+                goncourt.create_selection_livre(selectionLivre)
         elif choice == "4":
             pass
         elif choice == "5":
