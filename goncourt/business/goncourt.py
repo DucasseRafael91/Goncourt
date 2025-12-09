@@ -5,11 +5,13 @@ Classe School
 """
 
 from dataclasses import dataclass, field
-from datetime import date
+
 from typing import Optional
 
 from daos.editor_dao import EditorDao
 from models.Editor import Editor
+from daos.book_dao import BookDao
+from models.Book import Book
 
 
 
@@ -25,4 +27,9 @@ class Goncourt:
     def get_editor_by_id(id_editor: int) -> Optional[Editor]:
         editor_dao: EditorDao = EditorDao()
         return editor_dao.read(id_editor)
+
+    @staticmethod
+    def get_book_by_id(id_book: str) -> Optional[Book]:
+        book_dao: BookDao = BookDao()
+        return book_dao.read(id_book)
 

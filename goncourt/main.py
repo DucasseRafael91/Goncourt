@@ -23,6 +23,7 @@ Bienvenue dans le prix Goncourt
 
 
     print(goncourt.get_editor_by_id(1))
+    print(goncourt.get_book_by_id('9782226498687'))
 
 
 if __name__ == '__main__':
