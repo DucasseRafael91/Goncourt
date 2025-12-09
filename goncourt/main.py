@@ -28,7 +28,7 @@ Bienvenue dans le prix Goncourt
         print("4 - Indiquer le nombre de votes obtenus par chaque livre présent au dernier tour de scrutin")
         print("5 - Quitter")
 
-        choice = input("Tapez 1, 2 ou 3 : ")
+        choice = input("Tapez 1, 2, 3 : ")
 
         if choice == "1":
             print_books(goncourt)
@@ -49,9 +49,6 @@ Bienvenue dans le prix Goncourt
                 book.nbr_votes = votes
                 goncourt.update_book(book)
                 print(f"Le livre '{book.title}' a obtenu {book.nbr_votes} votes.")
-
-
-
         elif choice == "5":
             print("Au revoir!")
             break
@@ -90,9 +87,9 @@ def assign_book_to_selection(books: list[Book], goncourt: Goncourt, num_books: i
     for i in range(1, num_books + 1):
         book_chosen = int(input(f"Tapez le numéro du livre {i} : "))
         selected_book = books[book_chosen - 1]
-        selectionLivre = SelectionLivre(selected_book)
-        selectionLivre.selection = selection_number
-        goncourt.create_selection_book(selectionLivre)
+        selection_book = SelectionLivre(selected_book)
+        selection_book.selection = selection_number
+        goncourt.create_selection_book(selection_book)
 
 
 if __name__ == '__main__':
