@@ -37,7 +37,20 @@ Bienvenue dans le prix Goncourt
         elif choice == "3":
             indicate_selection(goncourt,3)
         elif choice == "4":
-            pass
+            books = goncourt.get_all_books_by_selection(3)
+            print("Livres de la sélection 3 :")
+            index = 1
+            for book in books:
+                print(f"{index}-{book}")
+                index += 1
+            print("Veuillez indiquer le nombre de votes obtenus par chaque livre :")
+            for book in books:
+                votes = int(input(f"Nombre de votes pour le livre '{book.title}': "))
+                book.nbr_votes = votes
+                print(f"Le livre '{book.title}' a obtenu {book.nbr_votes} votes.")
+
+
+
         elif choice == "5":
             print("Au revoir!")
             break
