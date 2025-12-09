@@ -3,6 +3,9 @@
 """
 Classe Dao[Address]
 """
+from IPython.core.release import author
+
+from daos.author_dao import AuthorDao
 from daos.editor_dao import EditorDao
 from models.Book import Book
 from daos.dao import Dao
@@ -50,6 +53,8 @@ class BookDao(Dao[Book]):
             book.isbn = record['l_isbn']
             editorDao: EditorDao = EditorDao()
             book.editor = editorDao.read(record['l_fk_id_editeur'])
+            authorDao: AuthorDao = AuthorDao()
+            book.author = authorDao.read(record['l_fk_id_auteur'])
             books.append(book)
 
         return books
