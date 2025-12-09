@@ -34,7 +34,7 @@ class Goncourt:
         return book_dao.read(id_book)
 
     @staticmethod
-    def get_all_books():
+    def get_all_books_by_selection(id_selection: int) -> list[Book]:
         book_dao: BookDao = BookDao()
-        return book_dao.read_all()
+        return book_dao.read_by_selection(id_selection)
 

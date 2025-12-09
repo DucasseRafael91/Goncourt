@@ -44,7 +44,7 @@ class Book:
         character.book = self
 
     def __str__(self) -> str:
-        return (f"'{self.title}' par {'test'}, édité par {'test'}, "
+        return (f"'{self.title}' écrit par {'test'}, édité par {self.editor}, "
                 f"publié le {self.publication_date}, {self.pages} pages, "
                 f"prix éditeur : {self.editor_price}€")
 

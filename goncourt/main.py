@@ -30,8 +30,14 @@ Bienvenue dans le prix Goncourt
         choice = input("Tapez 1, 2 ou 3 : ")
 
         if choice == "1":
-            print("\nListe des livres :")
-            print(goncourt.get_all_books())
+            for i in range(1, 4):
+                books = goncourt.get_all_books_by_selection(i)
+                print(f"\nLivres de la sélection {i} :")
+                for book in books:
+                    print(f"-{book}")
+            books = goncourt.get_all_books_by_selection(4)
+            print(f"\nLivre Laureat :")
+            print(f"-{books[0]}")
         elif choice == "2":
             pass
         elif choice == "3":
