@@ -4,7 +4,7 @@
 Classe Dao[SelectionLivre]
 """
 
-from models. import SelectionLivre
+from models.selection_livre import SelectionLivre
 from daos.dao import Dao
 from dataclasses import dataclass
 from typing import Optional, List
@@ -38,5 +38,14 @@ class SelectionLivreDao(Dao[SelectionLivre]):
     def update(self, selection: SelectionLivre) -> bool:
         pass
 
-    def delete(self, id_selection: int) -> bool:
-        pass
+    def delete_by_selection_id(self, id_selection: int) -> bool:
+        try:
+            with Dao.connection.cursor() as cursor:
+                sql = "DELETE FROM g_selection_livre WHERE s_fk_selection_id=%s"
+                cursor.execute(sql, (id_selection,))
+                Dao.connection.commit()
+                return cursor.rowcount > 0
+        except Exception as e:
+            print(f"Erreur lors de la suppression : {e}")
+            return False
+

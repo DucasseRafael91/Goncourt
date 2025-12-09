@@ -9,9 +9,12 @@ from dataclasses import dataclass, field
 from typing import Optional
 
 from daos.editor_dao import EditorDao
+
 from models.Editor import Editor
 from daos.book_dao import BookDao
 from models.Book import Book
+from daos.selection_livre_dao import SelectionLivreDao
+from models.selection_livre import SelectionLivre
 
 
 
@@ -37,4 +40,9 @@ class Goncourt:
     def get_all_books_by_selection(id_selection: int) -> list[Book]:
         book_dao: BookDao = BookDao()
         return book_dao.read_by_selection(id_selection)
+
+    @staticmethod
+    def delete_selection_livre_by_selection_id(id_selection: int) -> bool:
+        selectionLivreDao: SelectionLivreDao = SelectionLivreDao()
+        return selectionLivreDao.delete_by_selection_id(id_selection)
 

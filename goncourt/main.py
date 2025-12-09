@@ -37,13 +37,20 @@ Bienvenue dans le prix Goncourt
                     print(f"-{book}")
             books = goncourt.get_all_books_by_selection(4)
             print("Livre Lauréat :")
-            print(f"-{books[0]}")
+            print(f"{books[0]}")
         elif choice == "2":
             books = goncourt.get_all_books_by_selection(1)
             print("Livres de la sélection 1 :")
+            index=1
             for book in books:
-                print(f"-{book}")
+                print(f"{index} {book}")
+                index=index+1
+            goncourt.delete_selection_livre_by_selection_id(2)
             print("Choisissez les 8 livres qui doivent faire partie de la deuxiéme selection :")
+            for i in range(1, 9):
+                book_choosen = int(input(f"Tapez le numéro du livre {i} : "))
+                selected_book = books[book_choosen - 1]
+                selectionLivreDao = SelectionLivreDao()
         elif choice == "3":
             pass
         elif choice == "4":
