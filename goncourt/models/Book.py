@@ -11,14 +11,14 @@ from models import Character
 @dataclass
 class Book:
     """Livre représentant un livre dans le contexte du prix Goncourt."""
-    id: Optional[int] = field(default=None, init=False)
+    isbn: Optional[str] = field(default=None, init=False)
     title: str
     resume: str
     publication_date: date
     pages: int
     editor_price: float
-    editor: Editor
-    author: Author
+    editor: Optional[Editor] = field(default=None, init=False)
+    author: Optional[Author] = field(default=None, init=False)
     characters_in_story: list[Character] = field(default_factory=list, init=False)
 
     def set_editor(self, editor: Editor) -> None:
@@ -44,4 +44,7 @@ class Book:
         character.book = self
 
     def __str__(self) -> str:
-        return self.title
+        return (f"'{self.title}' par {'test'}, édité par {'test'}, "
+                f"publié le {self.publication_date}, {self.pages} pages, "
+                f"prix éditeur : {self.editor_price}€")
+
