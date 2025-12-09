@@ -9,7 +9,7 @@ from typing import Optional
 
 
 @dataclass
-class Editeur:
+class Editor:
     """Editeur représentant un éditeur de livres."""
     id: Optional[int] = field(default=None, init=False)
     name: str
