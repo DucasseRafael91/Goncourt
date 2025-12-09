@@ -67,7 +67,7 @@ class BookDao(Dao[Book]):
                 """
         try:
             with Dao.connection.cursor() as cursor:
-                sql = """UPDATE book SET l_titre=%s, l_resume=%s, l_date_parution=%s, l_nombre_pages=%s , 
+                sql = """UPDATE g_livre SET l_titre=%s, l_resume=%s, l_date_parution=%s, l_nombre_pages=%s , 
                 l_prix_editeur=%s , l_fk_id_editeur=%s , l_fk_id_auteur=%s , l_nbr_votes=%s WHERE l_isbn=%s"""
                 cursor.execute(sql, (
                     book.title,

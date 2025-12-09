@@ -33,9 +33,9 @@ Bienvenue dans le prix Goncourt
         if choice == "1":
             print_books(goncourt)
         elif choice == "2":
-            indicate_selection(goncourt,2)
+            indicate_selection(goncourt, 2)
         elif choice == "3":
-            indicate_selection(goncourt,3)
+            indicate_selection(goncourt, 3)
         elif choice == "4":
             books = goncourt.get_all_books_by_selection(3)
             print("Livres de la sélection 3 :")
