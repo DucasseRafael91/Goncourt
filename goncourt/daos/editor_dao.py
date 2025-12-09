@@ -21,7 +21,7 @@ class EditorDao(Dao[Editor]):
         editor: Optional[Editor]
 
         with Dao.connection.cursor() as cursor:
-            sql = "SELECT * FROM editor WHERE e_id=%s"
+            sql = "SELECT * FROM g_editeur WHERE e_id=%s"
             cursor.execute(sql, (id_editor,))
             record = cursor.fetchone()
         if record is not None:
