@@ -47,6 +47,7 @@ Bienvenue dans le prix Goncourt
             for book in books:
                 votes = int(input(f"Nombre de votes pour le livre '{book.title}': "))
                 book.nbr_votes = votes
+                goncourt.update_book(book)
                 print(f"Le livre '{book.title}' a obtenu {book.nbr_votes} votes.")
 
 
@@ -76,7 +77,7 @@ def indicate_selection(goncourt: Goncourt, selection_number: int):
     for book in books:
         print(f"{index} {book}")
         index = index + 1
-    goncourt.delete_selection_livre_by_selection_id(selection_number)
+    goncourt.delete_selection_book_by_selection_id(selection_number)
     print(f"Choisissez les livres qui doivent faire partie de la {selection_number}eme selection :")
     if selection_number == 2:
         num_books = 8
@@ -91,7 +92,7 @@ def assign_book_to_selection(books: list[Book], goncourt: Goncourt, num_books: i
         selected_book = books[book_chosen - 1]
         selectionLivre = SelectionLivre(selected_book)
         selectionLivre.selection = selection_number
-        goncourt.create_selection_livre(selectionLivre)
+        goncourt.create_selection_book(selectionLivre)
 
 
 if __name__ == '__main__':

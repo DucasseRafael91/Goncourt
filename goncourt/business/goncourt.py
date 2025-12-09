@@ -42,12 +42,17 @@ class Goncourt:
         return book_dao.read_by_selection(id_selection)
 
     @staticmethod
-    def create_selection_livre(selection_livre: SelectionLivre) -> int:
+    def create_selection_book(selection_livre: SelectionLivre) -> int:
         selectionLivreDao: SelectionLivreDao = SelectionLivreDao()
         return selectionLivreDao.create(selection_livre)
 
     @staticmethod
-    def delete_selection_livre_by_selection_id(id_selection: int) -> bool:
+    def update_book(book: Book) -> int:
+        book_dao: BookDao = BookDao()
+        return book_dao.update(book)
+
+    @staticmethod
+    def delete_selection_book_by_selection_id(id_selection: int) -> bool:
         selectionLivreDao: SelectionLivreDao = SelectionLivreDao()
         return selectionLivreDao.delete_by_selection_id(id_selection)
 
