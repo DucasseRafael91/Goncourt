@@ -62,12 +62,13 @@ class SelectionLivre
 {
     -integer id
     -string nom
+    -integer nombre_votes
 }
 
 Auteur "1" --> "0..n" Livre : ecrit >
 Editeur "1" --> "0..n" Livre : publie >
 Livre "1" --> "0..n" Personnage : comporte >
-Livre "1" --> "0..n" Vote : recoit >
+Livre "1" --> "0..n" Vote : reçoit >
 
 Jury "1" --> "0..n" Vote : effectue >
 Vote "1" --> "1" TourVote : pour >
