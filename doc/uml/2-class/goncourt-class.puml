@@ -15,7 +15,6 @@ class Auteur
     -integer id
     -string nom
     -string prenom
-    -date date_naissance
     -text biographie
 }
 
@@ -23,7 +22,6 @@ class Editeur
 {
     -integer id
     -string nom
-    -string localisation
 }
 
 class Personnage
@@ -38,6 +36,8 @@ class Jury
     -string identifiant
     -string mot_de_passe
     -boolean est_president
+    -string nom
+    -string prenom
 }
 
 class TourVote
@@ -56,17 +56,13 @@ class Selection
 {
     -integer id
     -string nom
-    -date date_selection
 }
 
 class SelectionLivre
 {
     -integer id
     -string nom
-    -date date_selection
 }
-
-' Relations
 
 Auteur "1" --> "0..n" Livre : ecrit >
 Editeur "1" --> "0..n" Livre : publie >

@@ -4,22 +4,28 @@ left to right direction
 
 actor President as p
 actor Utilisateur as u
+actor Jury as j
 
-u <|-right- p
+u <|-right- j
+j <|-right- p
+
 
 rectangle Goncourt {
   usecase "Afficher les livres composant chaque selection" as UC1
   usecase "Indiquer les livres de la deuxième et troisième sélection" as UC2
-  usecase "Indiquer le nombre de votes obtenus" as UC3
-  usecase "Se connecter" as UC4
+  usecase "Indiquer le nombre de votes obtenus par chaque livre présent au dernier tour de scrutin" as UC3
+  usecase "Renseigner ses votes" as UC4
+  usecase "Se connecter" as UC5
 }
 
 u -- UC1
 p -- UC2
 p -- UC3
+j -- UC4
 
- UC4 .up.> UC1 : extends
- UC4 .up.> UC2 : extends
- UC4 .up.> UC3 : extends
+
+ UC5 .up.> UC2 : extends
+ UC5 .up.> UC3 : extends
+ UC5 .up.> UC4 : extends
 
 @enduml
