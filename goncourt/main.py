@@ -2,9 +2,8 @@
 # -*- coding: utf-8 -*-
 
 """
-Application de gestion d'une école
+Application de gestion d'une sélection du prix Goncourt
 """
-from datetime import date
 
 from business.goncourt import Goncourt
 from models import Book
@@ -20,7 +19,8 @@ Bienvenue dans le prix Goncourt
 
     goncourt: Goncourt = Goncourt()
 
-    while True:
+    end_program = False
+    while not end_program:
         print("\nVeuillez choisir une option :")
         print("1 - Voir tous les livres sélectionnés au prix Goncourt")
         print("2 - Indiquer les livres faisant partie de la deuxième selection")
@@ -37,23 +37,27 @@ Bienvenue dans le prix Goncourt
         elif choice == "3":
             indicate_selection(goncourt, 3)
         elif choice == "4":
-            books = goncourt.get_all_books_by_selection(3)
-            print("Livres de la sélection 3 :")
-            index = 1
-            for book in books:
-                print(f"{index}-{book}")
-                index += 1
-            print("Veuillez indiquer le nombre de votes obtenus par chaque livre :")
-            for book in books:
-                votes = int(input(f"Nombre de votes pour le livre '{book.title}': "))
-                book.nbr_votes = votes
-                goncourt.update_book(book)
-                print(f"Le livre '{book.title}' a obtenu {book.nbr_votes} votes.")
+            indicate_votes(goncourt)
         elif choice == "5":
             print("Au revoir!")
-            break
+            end_program = True
         else:
             print("Choix invalide, veuillez taper 1, 2 ou 3.")
+
+
+def indicate_votes(goncourt: Goncourt):
+    books = goncourt.get_all_books_by_selection(3)
+    print("Livres de la sélection 3 :")
+    index = 1
+    for book in books:
+        print(f"{index}-{book}")
+        index += 1
+    print("Veuillez indiquer le nombre de votes obtenus par chaque livre :")
+    for book in books:
+        votes = int(input(f"Nombre de votes pour le livre '{book.title}': "))
+        book.nbr_votes = votes
+        goncourt.update_book(book)
+        print(f"Le livre '{book.title}' a obtenu {book.nbr_votes} votes.")
 
 
 def print_books(goncourt: Goncourt):
