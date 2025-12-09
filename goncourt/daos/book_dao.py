@@ -33,7 +33,19 @@ class BookDao(Dao[Book]):
         return book
 
     def read_all(self) -> List[Book]:
-        pass
+        """Renvoie toutes les adresses présentes dans la table 'address'."""
+        books: List[Book] = []
+        with Dao.connection.cursor() as cursor:
+            sql = "SELECT * FROM g_livre"
+            cursor.execute(sql)
+            records = cursor.fetchall()
+
+        for record in records:
+            book = Book(record['l_titre'], record['l_resume'], record['l_date_parution'], record['l_nombre_pages'],record['l_prix_editeur'])
+            book.isbn = record['l_isbn']
+            books.append(book)
+
+        return books
 
     def update(self, address: Book) -> bool:
         pass

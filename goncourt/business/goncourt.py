@@ -33,3 +33,8 @@ class Goncourt:
         book_dao: BookDao = BookDao()
         return book_dao.read(id_book)
 
+    @staticmethod
+    def get_all_books():
+        book_dao: BookDao = BookDao()
+        return book_dao.read_all()
+

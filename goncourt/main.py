@@ -20,10 +20,7 @@ Bienvenue dans le prix Goncourt
 
     goncourt: Goncourt = Goncourt()
 
-
-
-    print(goncourt.get_editor_by_id(1))
-    print(goncourt.get_book_by_id('9782226498687'))
+    print(goncourt.get_all_books())
 
 
 if __name__ == '__main__':
