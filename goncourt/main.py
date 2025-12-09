@@ -36,10 +36,14 @@ Bienvenue dans le prix Goncourt
                 for book in books:
                     print(f"-{book}")
             books = goncourt.get_all_books_by_selection(4)
-            print(f"\nLivre Laureat :")
+            print("Livre Lauréat :")
             print(f"-{books[0]}")
         elif choice == "2":
-            pass
+            books = goncourt.get_all_books_by_selection(1)
+            print("Livres de la sélection 1 :")
+            for book in books:
+                print(f"-{book}")
+            print("Choisissez les 8 livres qui doivent faire partie de la deuxiéme selection :")
         elif choice == "3":
             pass
         elif choice == "4":
