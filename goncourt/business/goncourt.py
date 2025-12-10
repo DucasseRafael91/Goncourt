@@ -16,8 +16,6 @@ from models.Book import Book
 from daos.selection_livre_dao import SelectionLivreDao
 from models.selection_livre import SelectionLivre
 
-
-
 @dataclass
 class Goncourt:
     """Couche métier de l'application de gestion d'une école,
@@ -39,12 +37,12 @@ class Goncourt:
     @staticmethod
     def get_all_books_by_selection(id_selection: int) -> list[Book]:
         book_dao: BookDao = BookDao()
-        return read_by_selection(id_selection)
+        return book_dao.read_by_selection(id_selection)
 
     @staticmethod
     def create_selection_book(selection_livre: SelectionLivre) -> int:
-        selectionLivreDao: SelectionLivreDao = SelectionLivreDao()
-        return selectionLivreDao.create(selection_livre)
+        selection_livre_dao: SelectionLivreDao = SelectionLivreDao()
+        return selection_livre_dao.create(selection_livre)
 
     @staticmethod
     def update_book(book: Book) -> int:
@@ -52,9 +50,14 @@ class Goncourt:
         return book_dao.update(book)
 
     @staticmethod
+    def update_selection_book(book: Book) -> int:
+        selection_book: SelectionLivreDao = SelectionLivreDao()
+        return selection_book.update(book)
+
+    @staticmethod
     def delete_selection_book_by_selection_id(id_selection: int) -> bool:
-        selectionLivreDao: SelectionLivreDao = SelectionLivreDao()
-        return selectionLivreDao.delete_by_selection_id(id_selection)
+        selection_livre_dao: SelectionLivreDao = SelectionLivreDao()
+        return selection_livre_dao.delete_by_selection_id(id_selection)
 
 
 

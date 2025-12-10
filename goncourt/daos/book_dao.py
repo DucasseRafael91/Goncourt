@@ -70,6 +70,32 @@ class BookDao(Dao[Book]):
 
         return book
 
+    def read_by_selection(self, id_selection: int) -> List[Book]:
+        """Renvoie toutes les adresses présentes dans la table 'address'."""
+        books: List[Book] = []
+        with Dao.connection.cursor() as cursor:
+            sql = ("SELECT * FROM g_livre INNER JOIN g_selection_livre ON l_isbn = s_fk_livre_isbn WHERE "
+                   "s_fk_selection_id=%s ORDER BY "
+                   "s_fk_selection_id")
+            cursor.execute(sql, (id_selection,))
+            records = cursor.fetchall()
+
+        for record in records:
+            book = Book(record['l_titre'],
+                        record['l_resume'],
+                        record['l_date_parution'],
+                        record['l_nombre_pages'],
+                        record['l_prix_editeur'])
+            book.isbn = record['l_isbn']
+            editor_dao: EditorDao = EditorDao()
+            book.editor = editor_dao.read(record['l_fk_id_editeur'])
+            author_dao: AuthorDao = AuthorDao()
+            book.author = author_dao.read(record['l_fk_id_auteur'])
+            book.author = author_dao.read(record['l_fk_id_auteur'])
+            books.append(book)
+
+        return books
+
     def update(self, book: Book) -> bool:
         """Met à jour en BD l'entité Course correspondant à course
 

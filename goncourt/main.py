@@ -6,6 +6,7 @@ Application de gestion d'une sélection du prix Goncourt
 """
 
 from business.goncourt import Goncourt
+from daos.selection_livre_dao import SelectionLivreDao
 from models import Book
 from models.selection_livre import SelectionLivre
 
@@ -54,10 +55,11 @@ def indicate_votes(goncourt: Goncourt):
         index += 1
     print("Veuillez indiquer le nombre de votes obtenus par chaque livre :")
     for book in books:
+        selection_book = SelectionLivre(book)
         votes = int(input(f"Nombre de votes pour le livre '{book.title}': "))
-        book.nbr_votes = votes
-        goncourt.update_book(book)
-        print(f"Le livre '{book.title}' a obtenu {book.nbr_votes} votes.")
+        selection_book.nbr_votes = votes
+        goncourt.update_selection_book(selection_book)
+        print(f"Le livre '{book.title}' a obtenu {selection_book.nbr_votes} votes.")
 
 
 def print_books(goncourt: Goncourt):
@@ -67,7 +69,7 @@ def print_books(goncourt: Goncourt):
         for book in books:
             print(f"-{book}")
     books = goncourt.get_all_books_by_selection(4)
-    print("Livre Lauréat :")
+    print("\nLivre Lauréat :")
     print(f"{books[0]}")
 
 

@@ -54,8 +54,29 @@ class SelectionLivreDao(Dao[SelectionLivre]):
         pass
 
     def update(self, selection: SelectionLivre) -> bool:
-        # TODO document why this method is empty
-        pass
+        """Met à jour en BD l'entité Course correspondant à course
+
+
+                        :param book: Livre déjà mis à jour en mémoire
+                        :return: True si la mise à jour a pu être réalisée
+                        """
+        try:
+            with Dao.connection.cursor() as cursor:
+                sql = """UPDATE g_selection_livre SET s_nbr_votes=%s 
+                         WHERE s_fk_livre_isbn=%s"""
+                cursor.execute(sql, (
+                    selection.nbr_votes,
+                    selection.book.isbn
+                ))
+
+            Dao.connection.commit()
+
+            return cursor.rowcount > 0
+
+        except Exception as e:
+            print("Erreur lors de la mise à jour :", e)
+            Dao.connection.rollback()
+            return False
 
     def delete(self, id_selection: int) -> bool:
         try:
