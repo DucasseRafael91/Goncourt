@@ -48,6 +48,7 @@ Bienvenue dans le prix Goncourt
 
 def indicate_votes(goncourt: Goncourt):
     books = goncourt.get_all_books_by_selection(3)
+    goncourt.update_nbr_votes_selection_book()
     print("Livres de la sélection 3 :")
     index = 1
     for book in books:
@@ -69,7 +70,7 @@ def print_books(goncourt: Goncourt):
         print(f"\nLivres de la sélection {i} :")
         for book in books:
             nbr_votes = goncourt.get_nbr_votes_by_selection(book.isbn)
-            print(f"-{book} avec {nbr_votes} votes" if nbr_votes is not 0 else f"-{book}")
+            print(f"-{book} avec {nbr_votes} votes" if nbr_votes != 0 else f"-{book}")
     books = goncourt.get_all_books_by_selection(4)
     print("\nLivre Lauréat :")
     print(f"{books[0]}")

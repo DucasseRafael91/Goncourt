@@ -90,6 +90,27 @@ class SelectionLivreDao(Dao[SelectionLivre]):
             Dao.connection.rollback()
             return False
 
+    def delete_nbr_votes(self) -> bool:
+        """Met à jour en BD l'entité Course correspondant à course
+
+
+                        :param book: Livre déjà mis à jour en mémoire
+                        :return: True si la mise à jour a pu être réalisée
+                            """
+        try:
+            with Dao.connection.cursor() as cursor:
+                sql = """UPDATE g_selection_livre SET s_nbr_votes=0 """
+                cursor.execute(sql)
+
+            Dao.connection.commit()
+
+            return cursor.rowcount > 0
+
+        except Exception as e:
+            print("Erreur lors de la mise à jour :", e)
+            Dao.connection.rollback()
+            return False
+
     def delete(self, id_selection: int) -> bool:
         try:
             with Dao.connection.cursor() as cursor:

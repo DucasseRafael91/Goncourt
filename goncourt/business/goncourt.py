@@ -61,9 +61,14 @@ class Goncourt:
         return selection_book.update(book)
 
     @staticmethod
+    def update_nbr_votes_selection_book() -> int:
+        selection_book: SelectionLivreDao = SelectionLivreDao()
+        return selection_book.delete_nbr_votes()
+
+    @staticmethod
     def delete_selection_book_by_selection_id(id_selection: int) -> bool:
         selection_livre_dao: SelectionLivreDao = SelectionLivreDao()
-        return selection_livre_dao.delete_by_selection_id(id_selection)
+        return selection_livre_dao.delete(id_selection)
 
 
 
