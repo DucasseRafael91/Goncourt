@@ -48,8 +48,6 @@ class TourVote
 
 class Vote
 {
-    -integer id
-    -integer nb_voix
 }
 
 class Selection
