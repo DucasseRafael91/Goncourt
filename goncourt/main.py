@@ -72,7 +72,8 @@ def print_books(goncourt: Goncourt):
             print(f"-{book} et a obtenu {nbr_votes} votes" if nbr_votes != 0 else f"-{book}")
     print("\nLivre Lauréat :")
     book = goncourt.get_laureat_book_by_id_selection()
-    print(f"-{book}")
+    nbr_votes = goncourt.get_nbr_votes_by_selection(book.isbn)
+    print(f"-{book} et a obtenu {nbr_votes} votes" if nbr_votes != 0 else f"-{book}")
 
 
 def indicate_selection(goncourt: Goncourt, selection_number: int):
