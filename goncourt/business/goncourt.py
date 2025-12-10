@@ -25,14 +25,9 @@ class Goncourt:
     - students : liste des élèves"""
 
     @staticmethod
-    def get_editor_by_id(id_editor: int) -> Optional[Editor]:
-        editor_dao: EditorDao = EditorDao()
-        return editor_dao.read(id_editor)
-
-    @staticmethod
-    def get_book_by_id(id_book: str) -> Optional[Book]:
+    def get_laureat_book_by_id_selection() -> Optional[Book]:
         book_dao: BookDao = BookDao()
-        return book_dao.read(id_book)
+        return book_dao.read_laureat_book()
 
     @staticmethod
     def get_all_books_by_selection(id_selection: int) -> list[Book]:
@@ -50,10 +45,6 @@ class Goncourt:
         selection_livre_dao: SelectionLivreDao = SelectionLivreDao()
         return selection_livre_dao.create(selection_livre)
 
-    @staticmethod
-    def update_book(book: Book) -> int:
-        book_dao: BookDao = BookDao()
-        return book_dao.update(book)
 
     @staticmethod
     def update_selection_book(book: Book) -> int:

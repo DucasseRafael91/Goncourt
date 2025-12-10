@@ -3,7 +3,6 @@
 from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Optional
-from models import Book
 
 
 @dataclass
@@ -11,9 +10,9 @@ class Character:
     """Éditeur représentant un éditeur de livres."""
     id: Optional[int] = field(default=None, init=False)
     name: str
-    book: Optional[Book] = field(default=None, init=False)
+    book: Optional['Book'] = field(default=None, init=False)
 
-    def set_book(self, book: Book) -> None:
+    def set_book(self, book: 'Book') -> None:
         """Associe un éditeur à ce livre."""
         if self.book is not None and self in self.book.characters_in_story:
             self.book.characters_in_story.remove(self)
@@ -22,4 +21,5 @@ class Character:
             book.characters_in_story.append(self)
 
     def __str__(self) -> str:
-        return self.name + f" (dans '{self.book.title}')"
+        return self.name
+

@@ -22,6 +22,8 @@ class Book:
     characters_in_stories: Optional[List[Character]] = field(default_factory=list, init=False)
 
     def __str__(self) -> str:
+        characters = ", ".join(str(c) for c in self.characters_in_stories) \
+            if self.characters_in_stories else "Aucun"
 
         return (
             f"'{self.title}' écrit par {self.author.first_name} {self.author.last_name}, "
@@ -29,8 +31,9 @@ class Book:
             f"publié le {self.publication_date}, "
             f"{self.pages} pages, "
             f"prix éditeur : {self.editor_price}€, "
-            f"Personnages : {self.characters_in_stories}, "
+            f"Personnages : {characters}"
         )
+
 
 
 

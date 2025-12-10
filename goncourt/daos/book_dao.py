@@ -77,6 +77,42 @@ class BookDao(Dao[Book]):
 
         return book
 
+    def read_laureat_book(self) -> Optional[Book]:
+        """Renvoi le cours correspondant à l'entité dont l'id est id_course
+           (ou None s'il n'a pu être trouvé)"""
+        book: Optional[Book]
+
+        with Dao.connection.cursor() as cursor:
+            sql = ("""
+                SELECT *
+                FROM g_livre
+                INNER JOIN g_selection_livre ON l_isbn = s_fk_livre_isbn
+                WHERE s_nbr_votes = (
+                    SELECT MAX(s_nbr_votes)
+                    FROM g_selection_livre
+                )
+            """)
+            cursor.execute(sql)
+            record = cursor.fetchone()
+
+        if record is not None:
+            book = Book(record['l_titre'],
+                        record['l_resume'],
+                        record['l_date_parution'],
+                        record['l_nombre_pages'],
+                        record['l_prix_editeur'])
+            book.isbn = record['l_isbn']
+            character_dao: CharacterDao = CharacterDao()
+            book.characters_in_stories = character_dao.read(record['l_isbn'])
+            editor_dao: EditorDao = EditorDao()
+            book.editor = editor_dao.read(record['l_fk_id_editeur'])
+            author_dao: AuthorDao = AuthorDao()
+            book.author = author_dao.read(record['l_fk_id_auteur'])
+        else:
+            book = None
+
+        return book
+
     def read_by_selection(self, id_selection: int) -> List[Book]:
         """Renvoie toutes les adresses présentes dans la table 'address'."""
         books: List[Book] = []
@@ -99,7 +135,6 @@ class BookDao(Dao[Book]):
             editor_dao: EditorDao = EditorDao()
             book.editor = editor_dao.read(record['l_fk_id_editeur'])
             author_dao: AuthorDao = AuthorDao()
-            book.author = author_dao.read(record['l_fk_id_auteur'])
             book.author = author_dao.read(record['l_fk_id_auteur'])
             books.append(book)
 

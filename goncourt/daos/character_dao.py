@@ -3,10 +3,6 @@
 """
 Classe Dao[Address]
 """
-
-from daos.author_dao import AuthorDao
-from daos.editor_dao import EditorDao
-from models.Book import Book
 from daos.dao import Dao
 from dataclasses import dataclass
 from typing import Optional, List
@@ -25,7 +21,7 @@ class CharacterDao(Dao[Character]):
             records = cursor.fetchall()
 
         for record in records:
-            character = Character(record['p_nom']),
+            character = Character(record['p_nom'])
             characters.append(character)
 
         return characters

@@ -6,7 +6,6 @@ Application de gestion d'une sélection du prix Goncourt
 """
 
 from business.goncourt import Goncourt
-from daos.selection_livre_dao import SelectionLivreDao
 from models import Book
 from models.selection_livre import SelectionLivre
 
@@ -70,10 +69,10 @@ def print_books(goncourt: Goncourt):
         print(f"\nLivres de la sélection {i} :")
         for book in books:
             nbr_votes = goncourt.get_nbr_votes_by_selection(book.isbn)
-            print(f"-{book} avec {nbr_votes} votes" if nbr_votes != 0 else f"-{book}")
-    books = goncourt.get_all_books_by_selection(4)
+            print(f"-{book} et a obtenu {nbr_votes} votes" if nbr_votes != 0 else f"-{book}")
     print("\nLivre Lauréat :")
-    print(f"{books[0]}")
+    book = goncourt.get_laureat_book_by_id_selection()
+    print(f"-{book}")
 
 
 def indicate_selection(goncourt: Goncourt, selection_number: int):
@@ -92,11 +91,12 @@ def indicate_selection(goncourt: Goncourt, selection_number: int):
     assign_book_to_selection(books, goncourt, num_books, selection_number)
 
 
-def assign_book_to_selection(books: list[Book], goncourt: Goncourt, num_books: int, selection_number: int):
+def assign_book_to_selection(books: list['Book'], goncourt: Goncourt, num_books: int, selection_number: int):
     for i in range(1, num_books + 1):
         book_chosen = int(input(f"Tapez le numéro du livre {i} : "))
         selected_book = books[book_chosen - 1]
-        selection_book = SelectionLivre(selected_book)
+        selection_book = SelectionLivre()
+        selection_book.book = selected_book
         selection_book.selection = selection_number
         goncourt.create_selection_book(selection_book)
 
