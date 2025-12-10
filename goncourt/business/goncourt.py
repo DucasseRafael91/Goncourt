@@ -5,12 +5,7 @@ Classe School
 """
 
 from dataclasses import dataclass
-
 from typing import Optional
-
-from daos.editor_dao import EditorDao
-
-from models.Editor import Editor
 from daos.book_dao import BookDao
 from models.Book import Book
 from daos.selection_livre_dao import SelectionLivreDao
@@ -39,12 +34,10 @@ class Goncourt:
         selection_livre_dao: SelectionLivreDao = SelectionLivreDao()
         return selection_livre_dao.read_by_isbn(id_isbn)
 
-
     @staticmethod
     def create_selection_book(selection_livre: SelectionLivre) -> int:
         selection_livre_dao: SelectionLivreDao = SelectionLivreDao()
         return selection_livre_dao.create(selection_livre)
-
 
     @staticmethod
     def update_selection_book(book: Book) -> int:
@@ -60,6 +53,3 @@ class Goncourt:
     def delete_selection_book_by_selection_id(id_selection: int) -> bool:
         selection_livre_dao: SelectionLivreDao = SelectionLivreDao()
         return selection_livre_dao.delete(id_selection)
-
-
-
