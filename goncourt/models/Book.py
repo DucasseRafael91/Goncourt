@@ -16,7 +16,6 @@ class Book:
     publication_date: date
     pages: int
     editor_price: float
-    nbr_votes: Optional[int] = field(default=None, init=False)
     editor: Optional[Editor] = field(default=None, init=False)
     author: Optional[Author] = field(default=None, init=False)
 
@@ -26,8 +25,8 @@ class Book:
                     f", édité par {self.editor}, "
                     f"publié le {self.publication_date}, "
                     f"{self.pages} pages, "
-                    f"prix éditeur : {self.editor_price}€, "
-                    f"nombre de votes : {self.nbr_votes}")
+                    f"prix éditeur : {self.editor_price}€, ")
+
         else:
             return (f"'{self.title}' écrit par {self.author.first_name} {self.author.last_name}, "
                     f"édité par {self.editor}, "
