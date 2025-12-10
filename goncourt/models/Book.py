@@ -23,10 +23,14 @@ class Book:
 
     def __str__(self) -> str:
 
-        return (f"'{self.title}' écrit par {self.author.first_name} {self.author.last_name}"
-                f", édité par {self.editor}, "
-                f"publié le {self.publication_date}, "
-                f"{self.pages} pages, "
-                f"prix éditeur : {self.editor_price}€, ")
+        return (
+            f"'{self.title}' écrit par {self.author.first_name} {self.author.last_name}, "
+            f"édité par {self.editor}, "
+            f"publié le {self.publication_date}, "
+            f"{self.pages} pages, "
+            f"prix éditeur : {self.editor_price}€, "
+            f"Personnages : {self.characters_in_stories}, "
+        )
+
 
 

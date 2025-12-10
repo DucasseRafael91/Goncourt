@@ -6,10 +6,13 @@ Classe Dao[Address]
 
 from daos.author_dao import AuthorDao
 from daos.editor_dao import EditorDao
+from daos.character_dao import CharacterDao
 from models.Book import Book
 from daos.dao import Dao
 from dataclasses import dataclass
 from typing import Optional, List
+
+from models.Character import Character
 
 
 def read_by_selection(id_selection: int) -> List[Book]:
@@ -30,6 +33,10 @@ def read_by_selection(id_selection: int) -> List[Book]:
                     record['l_nombre_pages'],
                     record['l_prix_editeur'])
         book.isbn = record['l_isbn']
+        character_dao: CharacterDao = CharacterDao()
+        book.characters_in_stories = character_dao.read(book.isbn)
+        editor_dao: EditorDao = EditorDao()
+        book.editor = editor_dao.read(record['l_fk_id_editeur'])
         editor_dao: EditorDao = EditorDao()
         book.editor = editor_dao.read(record['l_fk_id_editeur'])
         author_dao: AuthorDao = AuthorDao()
@@ -87,6 +94,8 @@ class BookDao(Dao[Book]):
                         record['l_nombre_pages'],
                         record['l_prix_editeur'])
             book.isbn = record['l_isbn']
+            character_dao: CharacterDao = CharacterDao()
+            book.characters_in_stories = character_dao.read(record['l_isbn'])
             editor_dao: EditorDao = EditorDao()
             book.editor = editor_dao.read(record['l_fk_id_editeur'])
             author_dao: AuthorDao = AuthorDao()

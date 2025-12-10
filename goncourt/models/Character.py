@@ -11,7 +11,7 @@ class Character:
     """Éditeur représentant un éditeur de livres."""
     id: Optional[int] = field(default=None, init=False)
     name: str
-    book: Book
+    book: Optional[Book] = field(default=None, init=False)
 
     def set_book(self, book: Book) -> None:
         """Associe un éditeur à ce livre."""
