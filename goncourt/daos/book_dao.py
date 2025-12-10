@@ -12,41 +12,6 @@ from daos.dao import Dao
 from dataclasses import dataclass
 from typing import Optional, List
 
-from models.Character import Character
-
-
-def read_by_selection(id_selection: int) -> List[Book]:
-    """Renvoie toutes les adresses présentes dans la table 'address'."""
-    books: List[Book] = []
-    with Dao.connection.cursor() as cursor:
-        sql = ("SELECT * FROM g_livre INNER JOIN g_selection_livre ON l_isbn = s_fk_livre_isbn WHERE "
-               "s_fk_selection_id=%s ORDER BY"
-               "s_fk_selection_id")
-        cursor.execute(sql, (id_selection,))
-        records = cursor.fetchall()
-
-    for record in records:
-
-        book = Book(record['l_titre'],
-                    record['l_resume'],
-                    record['l_date_parution'],
-                    record['l_nombre_pages'],
-                    record['l_prix_editeur'])
-        book.isbn = record['l_isbn']
-        character_dao: CharacterDao = CharacterDao()
-        book.characters_in_stories = character_dao.read(book.isbn)
-        editor_dao: EditorDao = EditorDao()
-        book.editor = editor_dao.read(record['l_fk_id_editeur'])
-        editor_dao: EditorDao = EditorDao()
-        book.editor = editor_dao.read(record['l_fk_id_editeur'])
-        author_dao: AuthorDao = AuthorDao()
-        book.author = author_dao.read(record['l_fk_id_auteur'])
-        book.author = author_dao.read(record['l_fk_id_auteur'])
-        books.append(book)
-
-    return books
-
-
 @dataclass
 class BookDao(Dao[Book]):
     def create(self, book: Book) -> int:
