@@ -1,12 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from dataclasses import dataclass, field
-from datetime import date
 from typing import Optional
 from models import Book
-from models import Selection
-
-
 
 @dataclass
 class SelectionLivre:

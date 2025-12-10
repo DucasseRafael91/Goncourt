@@ -6,8 +6,6 @@ Classe Auteur représentant un auteur d'un livre
 
 from dataclasses import dataclass, field
 from typing import Optional
-from models import Book
-
 
 @dataclass
 class Author:
@@ -16,7 +14,6 @@ class Author:
     last_name: str
     first_name: str
     biography: Optional[str] = field(default=None, init=False)
-
 
     def __str__(self) -> str:
         return f"{self.first_name} {self.last_name}"
