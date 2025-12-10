@@ -37,3 +37,6 @@ class EditorDao(Dao[Editor]):
 
     def update(self, address: Editor) -> bool:
         pass
+
+    def delete(self, id_editor: int) -> bool:
+        pass
