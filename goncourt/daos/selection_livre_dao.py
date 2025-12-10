@@ -49,9 +49,21 @@ class SelectionLivreDao(Dao[SelectionLivre]):
 
         return selection
 
-    def read_all(self) -> List[SelectionLivre]:
-        # TODO document why this method is empty
-        pass
+    def read_by_isbn(self, selection_isbn: int) -> Optional[int]:
+        """Renvoie la sélection correspondant à l'entité dont l'id est id_selection
+           (ou None si elle n'a pu être trouvée)"""
+        nbr_votes: Optional[int]
+
+        with Dao.connection.cursor() as cursor:
+            sql = "SELECT s_nbr_votes FROM g_selection_livre WHERE s_fk_livre_isbn=%s"
+            cursor.execute(sql, (selection_isbn,))
+            record = cursor.fetchone()
+        if record is not None:
+            nbr_votes = record['s_nbr_votes']
+        else:
+            nbr_votes = 0
+
+        return nbr_votes
 
     def update(self, selection: SelectionLivre) -> bool:
         """Met à jour en BD l'entité Course correspondant à course

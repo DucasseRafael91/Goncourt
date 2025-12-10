@@ -55,7 +55,8 @@ def indicate_votes(goncourt: Goncourt):
         index += 1
     print("Veuillez indiquer le nombre de votes obtenus par chaque livre :")
     for book in books:
-        selection_book = SelectionLivre(book)
+        selection_book = SelectionLivre()
+        selection_book.book = book
         votes = int(input(f"Nombre de votes pour le livre '{book.title}': "))
         selection_book.nbr_votes = votes
         goncourt.update_selection_book(selection_book)
@@ -67,7 +68,8 @@ def print_books(goncourt: Goncourt):
         books = goncourt.get_all_books_by_selection(i)
         print(f"\nLivres de la sélection {i} :")
         for book in books:
-            print(f"-{book}")
+            nbr_votes = goncourt.get_nbr_votes_by_selection(book.isbn)
+            print(f"-{book} avec {nbr_votes} votes" if nbr_votes is not 0 else f"-{book}")
     books = goncourt.get_all_books_by_selection(4)
     print("\nLivre Lauréat :")
     print(f"{books[0]}")

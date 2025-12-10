@@ -7,7 +7,7 @@ from models import Book
 @dataclass
 class SelectionLivre:
     """Livre représentant un livre dans le contexte du prix Goncourt."""
-    book: Book
+    book: Optional[Book] = field(default=None, init=False)
     selection: Optional[int] = field(default=None, init=False)
     nbr_votes: Optional[int] = field(default=None, init=False)
 

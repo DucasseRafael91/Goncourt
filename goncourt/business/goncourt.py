@@ -40,6 +40,12 @@ class Goncourt:
         return book_dao.read_by_selection(id_selection)
 
     @staticmethod
+    def get_nbr_votes_by_selection(id_isbn: int) -> Optional[int]:
+        selection_livre_dao: SelectionLivreDao = SelectionLivreDao()
+        return selection_livre_dao.read_by_isbn(id_isbn)
+
+
+    @staticmethod
     def create_selection_book(selection_livre: SelectionLivre) -> int:
         selection_livre_dao: SelectionLivreDao = SelectionLivreDao()
         return selection_livre_dao.create(selection_livre)
