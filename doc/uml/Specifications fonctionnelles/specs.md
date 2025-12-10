@@ -1,4 +1,4 @@
-### Pour tout les utilisateurs, l'application permet :
+### Pour tous les utilisateurs, l'application permet :
 
 #### Afficher les livres
 

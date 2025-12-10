@@ -21,7 +21,6 @@ class SelectionLivreDao(Dao[SelectionLivre]):
                        """
                 cursor.execute(sql, (selection.selection, selection.book.isbn))
 
-
                 selection_id = cursor.lastrowid
 
             # Validation de l'insertion
@@ -51,9 +50,11 @@ class SelectionLivreDao(Dao[SelectionLivre]):
         return selection
 
     def read_all(self) -> List[SelectionLivre]:
+        # TODO document why this method is empty
         pass
 
     def update(self, selection: SelectionLivre) -> bool:
+        # TODO document why this method is empty
         pass
 
     def delete(self, id_selection: int) -> bool:
@@ -66,4 +67,3 @@ class SelectionLivreDao(Dao[SelectionLivre]):
         except Exception as e:
             print(f"Erreur lors de la suppression : {e}")
             return False
-

@@ -13,6 +13,7 @@ from typing import Optional, List
 @dataclass
 class EditorDao(Dao[Editor]):
     def create(self, editor: Editor) -> int:
+        # TODO document why this method is empty
         pass
 
     def read(self, id_editor: int) -> Optional[Editor]:
@@ -33,10 +34,13 @@ class EditorDao(Dao[Editor]):
         return editor
 
     def read_all(self) -> List[Editor]:
+        # TODO document why this method is empty
         pass
 
     def update(self, address: Editor) -> bool:
+        # TODO document why this method is empty
         pass
 
     def delete(self, id_editor: int) -> bool:
+        # TODO document why this method is empty
         pass
