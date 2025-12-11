@@ -10,5 +10,3 @@ class SelectionLivre:
     book: Optional[Book] = field(default=None, init=False)
     selection: Optional[int] = field(default=None, init=False)
     nbr_votes: Optional[int] = field(default=None, init=False)
-
-

@@ -26,7 +26,6 @@ class CharacterDao(Dao[Character]):
 
         return characters
 
-    
     def create(self, id_entity: int) -> Optional[Character]:
         # TODO document why this method is empty
         pass
@@ -38,4 +37,3 @@ class CharacterDao(Dao[Character]):
     def delete(self, id_entity: int) -> Optional[Character]:
         # TODO document why this method is empty
         pass
-

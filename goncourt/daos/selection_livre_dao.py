@@ -7,7 +7,7 @@ Classe Dao[SelectionLivre]
 from models.selection_livre import SelectionLivre
 from daos.dao import Dao
 from dataclasses import dataclass
-from typing import Optional, List
+from typing import Optional
 
 
 @dataclass
@@ -42,7 +42,7 @@ class SelectionLivreDao(Dao[SelectionLivre]):
             cursor.execute(sql, (id_selection,))
             record = cursor.fetchone()
         if record is not None:
-            selection = SelectionLivre(record['nom'])
+            selection = SelectionLivre()
             selection.id = id_selection
         else:
             selection = None
@@ -69,7 +69,7 @@ class SelectionLivreDao(Dao[SelectionLivre]):
         """Met à jour en BD l'entité Course correspondant à course
 
 
-                        :param book: Livre déjà mis à jour en mémoire
+                        :param selection: Sélection déjà mise à jour en mémoire
                         :return: True si la mise à jour a pu être réalisée
                         """
         try:
@@ -93,8 +93,6 @@ class SelectionLivreDao(Dao[SelectionLivre]):
     def delete_nbr_votes(self) -> bool:
         """Met à jour en BD l'entité Course correspondant à course
 
-
-                        :param book: Livre déjà mis à jour en mémoire
                         :return: True si la mise à jour a pu être réalisée
                             """
         try:

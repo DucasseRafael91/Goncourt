@@ -95,6 +95,9 @@ def indicate_selection(goncourt: Goncourt, selection_number: int):
 def assign_book_to_selection(books: list['Book'], goncourt: Goncourt, num_books: int, selection_number: int):
     for i in range(1, num_books + 1):
         book_chosen = int(input(f"Tapez le numéro du livre {i} : "))
+        if book_chosen < 1 or book_chosen > len(books):
+            print("Numéro de livre invalide, veuillez réessayer.")
+            book_chosen = int(input(f"Tapez le numéro du livre {i} : "))
         selected_book = books[book_chosen - 1]
         selection_book = SelectionLivre()
         selection_book.book = selected_book
